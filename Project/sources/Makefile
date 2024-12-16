@@ -6,13 +6,13 @@
 #    By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 09:23:15 by cabo-ram          #+#    #+#              #
-#    Updated: 2024/12/16 14:47:10 by cabo-ram         ###   ########.fr        #
+#    Updated: 2024/12/16 17:04:14 by cabo-ram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-SRC = main.c normalize.c op_rot_rev.c op_swap_push.c sort.c \
+SRC = main.c utils.c op_rot_rev.c op_swap_push.c sort.c \
 
 OBJS = $(SRC:.c=.o)
 HEADER = ../includes

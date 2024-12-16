@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:21:28 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/16 15:58:49 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:06:14 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	free_exit_msg(t_stack *stack, char *msg)
 			free(stack->a);
 		if (stack->b != NULL)
 			free(stack->b);
+		if (stack->receive_args != NULL)
+			free(stack->receive_args);
 		if (stack != NULL)
 			free(stack);
 	}
@@ -122,7 +124,7 @@ int	main(int ac, char **av)
 		sort_four_five(stack);
 	else
 		radix_sort(stack);
-	is_sorted(stack);
-	free_exit_msg(stack, NULL);
+	if (is_sorted(stack))
+		free_exit_msg(stack, NULL);
 	return (0);
 }
