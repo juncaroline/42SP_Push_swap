@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.c                                       :+:      :+:    :+:   */
+/*   op_swap_push.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:40:02 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/13 18:04:10 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/16 09:32:55 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	swap(char *str, t_stack *stack)
+void	swap(char *type, t_stack *stack)
 {
 	int	temp;
 
-	if (!ft_strncmp(str, "sa", 3) && stack->sizea > 1)
+	if (!ft_strncmp(type, "sa", 3) && stack->sizea > 1)
 	{
 		temp = stack->a[0];
 		stack->a[0] = stack->a[1];
 		stack->a[1] = temp;
 	}
-	else if (!ft_strncmp(str, "sb", 3) && stack->sizeb > 1)
-	{
-		temp = stack->b[0];
-		stack->b[0] = stack->b[1];
-		stack->b[1] = temp;
-	}
 }
 
-void	swap_both(char *str, t_stack *stack, char **last_move)
+void	swap_both(char *type, t_stack *stack, char **last_move)
 {
-	if(!ft_strncmp(str, "sa", 3) || !ft_strncmp(str, "sb", 3))
+	if (!ft_strncmp(type, "sa", 3) || !ft_strncmp(type, "sb", 3))
 	{
-		swap(str, stack);
-		if (*last_move && ((!ft_strncmp(*last_move, "sa", 3) && !ft_strncmp(str, "sb", 3)) ||
-			(!ft_strncmp(*last_move, "sb", 3) && !ft_strncmp(str, "sa", 3))))
+		swap(type, stack);
+		if (*last_move && ((!ft_strncmp(*last_move, "sa", 3)
+				&& !ft_strncmp(type, "sb", 3))
+				|| (!ft_strncmp(*last_move, "sb", 3)
+				&& !ft_strncmp(type, "sa", 3))))
 		{
 			swap("sa", stack);
 			swap("sb", stack);
@@ -45,17 +41,17 @@ void	swap_both(char *str, t_stack *stack, char **last_move)
 		}
 		else
 		{
-			ft_putendl_fd(str, 1);
-			*last_move = str;
+			ft_putendl_fd(type, 1);
+			*last_move = type;
 		}
 	}
 }
 
-void	push(char *str, t_stack *s)
+void	push(char *type, t_stack *s)
 {
 	int	temp;
 
-	if (ft_strncmp(str, "pa", 3) == 0)
+	if (ft_strncmp(type, "pa", 3) == 0)
 	{
 		if (s->sizeb <= 0)
 			return ;
@@ -66,7 +62,7 @@ void	push(char *str, t_stack *s)
 		ft_memmove(s->b, s->b + 1, sizeof(int) * s->sizeb);
 		s->sizea++;
 	}
-	else if (ft_strncmp(str, "pb", 3) == 0)
+	else if (ft_strncmp(type, "pb", 3) == 0)
 	{
 		if (s->sizea <= 0)
 			return ;
@@ -78,5 +74,3 @@ void	push(char *str, t_stack *s)
 		s->sizeb++;
 	}
 }
-
-void	rotate
