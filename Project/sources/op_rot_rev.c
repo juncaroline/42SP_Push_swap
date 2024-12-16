@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_reverse.c                                   :+:      :+:    :+:   */
+/*   op_rot_rev.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:16:12 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/13 18:58:30 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:39:28 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	rotate_both(char *str, t_stack *stack, char **last_move)
 		if (*last_move && (
 				(ft_strncmp(*last_move, "ra", 3) == 0
 					&& ft_strncmp(str, "rb", 3) == 0)
-					|| (ft_strncmp(*last_move, "rb", 3) == 0
+				|| (ft_strncmp(*last_move, "rb", 3) == 0
 					&& ft_strncmp(str, "ra", 3) == 0)))
 		{
 			rotate("ra", stack);
@@ -58,7 +58,7 @@ void	rotate_both(char *str, t_stack *stack, char **last_move)
 
 void	reverse_rotate(char *type, t_stack *stack)
 {
-    int temp;
+	int	temp;
 
 	if (ft_strncmp(type, "rra", 4) == 0)
 	{
@@ -72,19 +72,19 @@ void	reverse_rotate(char *type, t_stack *stack)
 		temp = stack->b[stack->sizeb - 1];
 		ft_memmove(stack->b + 1, stack->b, sizeof(int) * (stack->sizeb - 1));
 		stack->b[0] = temp;
-		ft_putendl_fd("rb", 1);
+		ft_putendl_fd("rrb", 1);
 	}
 }
 
 void	reverse_rotate_both(char *str, t_stack *stack, char **last_move)
 {
-	if (ft_strncmp(str, "rra", 3) == 0 || ft_strncmp(str, "rrb", 3) == 0)
+	if (ft_strncmp(str, "rra", 4) == 0 || ft_strncmp(str, "rrb", 4) == 0)
 	{
 		reverse_rotate(str, stack);
 		if (*last_move && (
 				(ft_strncmp(*last_move, "rra", 4) == 0
 					&& ft_strncmp(str, "rrb", 4) == 0)
-					|| (ft_strncmp(*last_move, "rrb", 4) == 0
+				|| (ft_strncmp(*last_move, "rrb", 4) == 0
 					&& ft_strncmp(str, "rra", 4) == 0)))
 		{
 			rotate("rra", stack);

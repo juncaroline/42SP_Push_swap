@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:57:13 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/16 10:16:04 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:40:20 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static void	check_args(int ac, char **av)
 	int	i;
 	int	j;
 
-	i = 0;
+	i = 1;
 	if (ac < 2)
 		free_exit_msg(NULL, "");
-	while (++i < ac)
+	while (i < ac)
 	{
 		j = 0;
 		if (!av[i][0] || (av[i][0] && av[i][0] == ' '))
@@ -35,17 +35,18 @@ static void	check_args(int ac, char **av)
 				free_exit_msg(NULL, "Error\n");
 			j++;
 		}
+		i++;
 	}
 }
 
-void normalize(t_stack *stack)
+void	normalize(t_stack *stack)
 {
 	int	i;
 	int	j;
 	int	k;
 	int	*temp;
 
-	temp = malloc(stack->sizea * sizeof *temp);
+	temp = malloc(stack->sizea * sizeof * temp);
 	if (temp == NULL)
 		free_exit_msg(stack, "Error\n");
 	i = -1;
@@ -64,7 +65,7 @@ void normalize(t_stack *stack)
 	free(temp);
 }
 
-void	exit_duplicate(t_stack *stack,int i)
+void	exit_duplicate(t_stack *stack, int i)
 {
 	int	j;
 
@@ -85,24 +86,10 @@ void	exit_duplicate(t_stack *stack,int i)
 	}
 }
 
-int	is_sorted(t_stack *stack)
-{
-	int	i;
-
-	i = 0;
-	while (i < stack->sizea - 1)
-	{
-		if (stack->a[i] > stack->a[i + 1])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 int	count(char const *number, char c)
 {
 	int	count;
-	
+
 	count = 0;
 	while (*number)
 	{
@@ -121,21 +108,21 @@ int	count(char const *number, char c)
 void	initialize(int ac, char **av, t_stack *stack)
 {
 	int	i;
-	
-	i = 0;
+
+	i = 1;
 	stack->sizea = 0;
 	stack->sizeb = 0;
-	while (--ac)
+	while (i < ac)
 	{
-		if (count(av[i + 1], ' '))
-			stack->sizea += count(av[i + 1], ' ');
+		if (count(av[i], ' '))
+			stack->sizea += count(av[i], ' ');
 		else
 			i++;
 	}
-	stack->a = malloc(stack->sizea * sizeof *stack->a);
+	stack->a = malloc(stack->sizea * sizeof * stack->a);
 	if (stack->a == NULL)
 		free_exit_msg(stack, "Error\n");
-	stack->b = malloc(stack->sizea * sizeof *stack->b);
+	stack->b = malloc(stack->sizea * sizeof * stack->b);
 	if (stack->b == NULL)
 		free_exit_msg(stack, "Error\n");
 }

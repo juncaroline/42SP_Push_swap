@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:40:02 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/16 09:32:55 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:36:32 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	swap_both(char *type, t_stack *stack, char **last_move)
 	{
 		swap(type, stack);
 		if (*last_move && ((!ft_strncmp(*last_move, "sa", 3)
-				&& !ft_strncmp(type, "sb", 3))
+					&& !ft_strncmp(type, "sb", 3))
 				|| (!ft_strncmp(*last_move, "sb", 3)
-				&& !ft_strncmp(type, "sa", 3))))
+					&& !ft_strncmp(type, "sa", 3))))
 		{
 			swap("sa", stack);
 			swap("sb", stack);
