@@ -6,7 +6,7 @@
 #    By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 09:23:15 by cabo-ram          #+#    #+#              #
-#    Updated: 2024/12/16 14:47:10 by cabo-ram         ###   ########.fr        #
+#    Updated: 2024/12/16 12:49:08 by cabo-ram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,12 @@ NAME = push_swap
 SRC = main.c normalize.c op_rot_rev.c op_swap_push.c sort.c \
 
 OBJS = $(SRC:.c=.o)
-HEADER = ../includes
-LIBFT = ../libraries/libft
+HEADER = includes
+LIBFT = libft
 
-CC = gcc
+CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER)/includes -g
+CFLAGS = -Wall -Wextra -Werror -I$(HEADER) -g
 
 RM = rm -rf
 
@@ -31,7 +31,9 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFT) -lft
+	@cp libft/libft.a .
+	@mv libft.a $(NAME)
+	ar rcs $(NAME) $(OBJS)
 
 clean:
 	$(RM) $(OBJS)

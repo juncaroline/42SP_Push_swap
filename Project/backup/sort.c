@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:41:11 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/16 14:13:29 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:51:23 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,10 @@ void	radix_sort(t_stack *stack)
 		size = stack->sizea;
 		while (size-- && !is_sorted(stack))
 		{
-			if (((stack->a[0] >> j) & 1) == 0)
+			if ((stack->a[0] >> j) & 1 == 0)
 				push("pb", stack);
 			else
-				rotate_both("ra", stack, last_move);
+				rotate_both("ra", stack, &last_move);
 		}
 		radix_stackb(stack, stack->sizeb, bit_size, j + 1);
 	}

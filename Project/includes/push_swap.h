@@ -6,27 +6,29 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:20:22 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/16 12:04:06 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:52:22 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include "../includes/libft.h"
+# include "../libraries/libft/libft.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <limits.h>
 
-#include <unistd.h>
-#include <stdlib.h>
-
-typedef struct	s_stack
+typedef struct s_stack
 {
-	int	*a;
-	int	*b;
-	int	sizea;
-	int	sizeb;
-}	t_stack;
+	int		*a;
+	int		*b;
+	int		sizea;
+	int		sizeb;
+	char	*receive_args;
+}			t_stack;
 
-void 	normalize(t_stack *stack);
+void	check_args(int ac, char **av);
+void	normalize(t_stack *stack);
 void	exit_duplicate(t_stack *stack, int i);
 int		count(char const *number, char c);
 void	initialize(int ac, char **av, t_stack *stack);
@@ -41,6 +43,9 @@ void	sort_three(t_stack *stack);
 void	sort_four_five(t_stack *stack);
 int		is_sorted(t_stack *stack);
 void	radix_sort(t_stack *stack);
+void	free_exit_msg(t_stack *stack, char *msg);
+void	parse(t_stack *stack);
+int		ft_atol(const char *str, t_stack *stack);
 int		main(int ac, char **av);
 
 #endif
