@@ -1,89 +1,83 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   normalize.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:57:13 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/16 12:52:16 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:31:41 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	check_args(int ac, char **av)
+void	exit_duplicate(t_stack *stack)
 {
-	int	i;
+	int i;
 	int	j;
 
-	i = 1;
-	if (ac < 2)
-		free_exit_msg(NULL, "");
-	while (i < ac)
+	i = 0;
+	while (i < stack->sizea)
 	{
-		j = 0;
-		if (!av[i][0] || (av[i][0] && av[i][0] == ' '))
-			free_exit_msg(NULL, "Error\n");
-		while (av[i][j])
+		j = i + 1;
+		while (j < stack->sizea)
 		{
-			if (!ft_isdigit(av[i][j]) && av[i][j] != ' '
-				&& av[i][j] != ' ' && av[i][j] != '+')
-				free_exit_msg(NULL, "Error\n");
-			else if ((av[i][j] == '-' || av[i][j] == '+')
-				&& (av[i][j + 1] == '\0' || av[i][j + 1] == ' '))
-				free_exit_msg(NULL, "Error\n");
+			if (stack->a[i] == stack->a[j])
+				free_exit_msg(stack, "Error\n");
 			j++;
 		}
 		i++;
 	}
 }
 
-void	normalize(t_stack *stack)
+int	ft_atol(const char *str, t_stack *stack)
 {
-	int	i;
-	int	j;
-	int	k;
-	int	*temp;
+	int			i;
+	long		neg;
+	long long	res;
 
-	temp = malloc(stack->sizea * sizeof * temp);
-	if (temp == NULL)
-		free_exit_msg(stack, "Error\n");
-	i = -1;
-	while (++i < stack->sizea)
+	i = 0;
+	neg = 1;
+	res = 0;
+	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-')
 	{
-		k = 0;
-		j = -1;
-		while (++j < stack->sizea)
-			if (stack->a[i] > stack->a[j])
-				k++;
-		temp[i] = k;
+		neg = -1;
+		i++;
 	}
-	i = stack->sizea;
-	while (i--)
-		stack->a[i] = temp[i];
-	free(temp);
+	if (ft_strlen(str) > 11)
+		free_exit_msg(stack, "Error\n");
+	while (str[i])
+	{
+		if (!(str[i] >= '0' && str[i] <= '9'))
+			free_exit_msg(stack, "Error\n");
+		res = res * 10 + (str[i++] - '0');
+		if ((neg == 1 && res > INT_MAX) || (neg == -1 && (res * neg) < INT_MIN))
+			free_exit_msg(stack, "Error\n");
+	}
+	return ((int)(res * neg));
 }
 
-void	exit_duplicate(t_stack *stack, int i)
+void	parse(t_stack *stack)
 {
-	int	j;
+	char	**temp;
+	int		i;
+	int		j;
 
 	j = 0;
-	if (i == 0)
+	temp = ft_split(stack->receive_args, ' ');
+	if (temp == NULL)
+		free_exit_msg(stack, "Error\n");
+	i = 0;
+	while (temp[i] != NULL && temp[i][0] != '\0')
 	{
-		while (i < stack->sizea)
-		{
-			j = i + 1;
-			while (j < stack->sizea)
-			{
-				if (stack->a[i] == stack->a[j])
-					free_exit_msg(stack, "Error\n");
-				j++;
-			}
-			i++;
-		}
+		stack->a[j++] = ft_atol(temp[i], stack);
+		free(temp[i]);
+		i++;
 	}
+	free(temp);
 }
 
 int	count(char const *number, char c)
@@ -119,10 +113,10 @@ void	initialize(int ac, char **av, t_stack *stack)
 		else
 			i++;
 	}
-	stack->a = malloc(stack->sizea * sizeof * stack->a);
+	stack->a = malloc(stack->sizea * sizeof(*stack->a));
 	if (stack->a == NULL)
 		free_exit_msg(stack, "Error\n");
-	stack->b = malloc(stack->sizea * sizeof * stack->b);
+	stack->b = malloc(stack->sizea * sizeof(*stack->b));
 	if (stack->b == NULL)
 		free_exit_msg(stack, "Error\n");
 }

@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:21:28 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/17 15:35:15 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:31:23 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	check_args(int ac, char **av)
 			free_exit_msg(NULL, "Error\n");
 		while (av[i][j])
 		{
-			if (!(ft_isdigit(av[i][j])) && av[i][j] != ' '
+			if (!ft_isdigit(av[i][j]) && av[i][j] != ' '
 				&& av[i][j] != '+' && av[i][j] != '-')
 				free_exit_msg(NULL, "Error\n");
 			else if ((av[i][j] == '-' || av[i][j] == '+')
@@ -104,7 +104,6 @@ void	normalize(t_stack *stack)
 				k++;
 		temp[i] = k;
 	}
-	i = stack->sizea;
 	while (i--)
 		stack->a[i] = temp[i];
 	free(temp);
@@ -123,8 +122,6 @@ int	main(int ac, char **av)
 	parse(stack);
 	exit_duplicate(stack);
 	normalize(stack);
-	if (stack->sizea <= 1)
-		free_exit_msg(stack, NULL);
 	if (stack->sizea == 2 && stack->a[0] > stack->a[1])
 		swap("sa", stack);
 	else if (stack->sizea == 3)
