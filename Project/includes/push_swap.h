@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:20:22 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/17 15:50:58 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/18 09:49:52 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_stack
 
 void	check_args(int ac, char **av);
 void	normalize(t_stack *stack);
-void	exit_duplicate(t_stack *stack);
+void	exit_sorted_duplicate(t_stack *stack, int i);
 int		count(char const *number, char c);
 void	initialize(int ac, char **av, t_stack *stack);
 void	swap(char *type, t_stack *stack);

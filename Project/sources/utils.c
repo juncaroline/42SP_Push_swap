@@ -6,28 +6,30 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:57:13 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/17 12:03:33 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/18 10:10:37 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	exit_duplicate(t_stack *stack)
+void	exit_sorted_duplicate(t_stack *stack, int i)
 {
-	int i;
 	int	j;
 
-	i = 0;
-	while (i < stack->sizea)
+	j = 0;
+	if (i == 0)
 	{
-		j = i + 1;
-		while (j < stack->sizea)
+		while (i < stack->sizea)
 		{
-			if (stack->a[i] == stack->a[j])
-				free_exit_msg(stack, "Error\n");
-			j++;
+			j = i + 1;
+			while (j < stack->sizea)
+			{
+				if (stack->a[i] == stack->a[j])
+					free_exit_msg(stack, "Error\n");
+				j++;
+			}
+			i++;
 		}
-		i++;
 	}
 	if (is_sorted(stack))
 		free_exit_msg(stack, NULL);
@@ -113,7 +115,8 @@ void	initialize(int ac, char **av, t_stack *stack)
 		if (count(av[i], ' '))
 			stack->sizea += count(av[i], ' ');
 		else
-			i++;
+			stack->sizea++;
+		i++;
 	}
 	stack->a = malloc(stack->sizea * sizeof(*stack->a));
 	if (stack->a == NULL)

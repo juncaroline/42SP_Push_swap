@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:40:02 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/17 16:58:53 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/18 10:27:35 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ void	swap(char *type, t_stack *stack)
 		temp = stack->a[0];
 		stack->a[0] = stack->a[1];
 		stack->a[1] = temp;
+		ft_putendl_fd("sa", 1);
 	}
 	else if (!ft_strncmp(type, "sb", 2) && stack->sizeb > 1)
 	{
 		temp = stack->b[0];
 		stack->b[0] = stack->b[1];
 		stack->b[1] = temp;
+		ft_putendl_fd("sb", 1);
 	}
 }
 

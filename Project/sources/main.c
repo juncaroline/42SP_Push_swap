@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:21:28 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/17 15:35:15 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/18 09:50:46 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	check_args(int ac, char **av)
 	int	j;
 
 	i = 1;
-	if (ac < 2)
-		free_exit_msg(NULL, "");
 	while (i < ac)
 	{
 		j = 0;
@@ -121,7 +119,7 @@ int	main(int ac, char **av)
 	initialize(ac, av, stack);
 	receive_args(ac, av, stack);
 	parse(stack);
-	exit_duplicate(stack);
+	exit_sorted_duplicate(stack, 0);
 	normalize(stack);
 	if (stack->sizea <= 1)
 		free_exit_msg(stack, NULL);
@@ -133,7 +131,7 @@ int	main(int ac, char **av)
 		sort_four_five(stack);
 	else
 		radix_sort(stack);
-	if (is_sorted(stack))
-		free_exit_msg(stack, NULL);
+	exit_sorted_duplicate(stack, 1);
+	free_exit_msg(stack, NULL);
 	return (0);
 }
