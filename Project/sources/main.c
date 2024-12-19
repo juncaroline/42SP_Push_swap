@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:21:28 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/18 09:50:46 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:17:26 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	check_args(int ac, char **av)
 	int	j;
 
 	i = 1;
+	if (ac < 2)
+		free_exit_msg(NULL, "");
 	while (i < ac)
 	{
 		j = 0;
