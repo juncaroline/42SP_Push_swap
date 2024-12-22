@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:40:02 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/22 10:31:02 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:36:40 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	swap(char *type, t_stack *stack)
 	int	temp;
 
 	if (!type || !stack)
-		return;
+		return ;
 	if (!ft_strncmp(type, "sa", 2) && stack->sizea > 1)
 	{
 		temp = stack->a[0];
@@ -39,7 +39,7 @@ void	push(char *type, t_stack *stack)
 	int	temp;
 
 	if (!type || !stack || !stack->a || !stack->b)
-		return;
+		return ;
 	if (ft_strncmp(type, "pa", 3) == 0 && stack->sizeb > 0)
 	{
 		temp = stack->b[0];

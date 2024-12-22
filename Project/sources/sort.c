@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:41:11 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/22 10:39:39 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:36:16 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	sort_four_five(t_stack *stack)
 	push ("pa", stack);
 	push ("pa", stack);
 }
-
 
 int	is_sorted(t_stack *stack)
 {
