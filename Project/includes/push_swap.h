@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:20:22 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/18 09:49:52 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/22 10:34:29 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,9 @@ void	exit_sorted_duplicate(t_stack *stack, int i);
 int		count(char const *number, char c);
 void	initialize(int ac, char **av, t_stack *stack);
 void	swap(char *type, t_stack *stack);
-void	swap_both(char *type, t_stack *stack, char **last_move);
 void	push(char *type, t_stack *s);
 void	rotate(char *type, t_stack *stack);
-void	rotate_both(char *str, t_stack *stack, char **last_move);
 void	reverse_rotate(char *type, t_stack *stack);
-void	reverse_rotate_both(char *str, t_stack *stack, char **last_move);
 void	sort_three(t_stack *stack);
 void	sort_four_five(t_stack *stack);
 int		is_sorted(t_stack *stack);

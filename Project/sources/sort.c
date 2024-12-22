@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:41:11 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/18 11:38:48 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/22 10:39:39 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ void	sort_three(t_stack *stack)
 
 void	sort_four_five(t_stack *stack)
 {
-	char	*last_move;
-
-	last_move = NULL;
 	while (stack->sizeb < 2)
 	{
 		if (stack->a[0] == 0 || stack->a[0] == 1)
@@ -42,7 +39,7 @@ void	sort_four_five(t_stack *stack)
 	if (stack->sizea > 2 && stack->a[2] != 4)
 	{
 		if (stack->a[0] == 4)
-			rotate_both("rr", stack, &last_move);
+			rotate("ra", stack);
 		else
 			reverse_rotate("rra", stack);
 	}
@@ -78,7 +75,6 @@ static void	radix_stackb(t_stack *stack, int sizeb, int bit_size, int j)
 	{
 		if (stack->sizeb > 0 && ((stack->b[0] >> j) & 1) == 0)
 			rotate("rb", stack);
-			//rotate_both("rr", stack, &last_move);
 		else
 			push("pa", stack);
 	}
@@ -109,7 +105,6 @@ void	radix_sort(t_stack *stack)
 				push("pb", stack);
 			else
 				rotate("ra", stack);
-				//rotate_both("rr", stack, &last_move);
 		}
 		radix_stackb(stack, stack->sizeb, bit_size, j + 1);
 	}
