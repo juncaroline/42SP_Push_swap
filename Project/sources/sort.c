@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:41:11 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/22 11:36:16 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/24 11:25:43 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,6 @@ int	is_sorted(t_stack *stack)
 
 static void	radix_stackb(t_stack *stack, int sizeb, int bit_size, int j)
 {
-	char	*last_move;
-
-	last_move = NULL;
 	while (sizeb-- && j <= bit_size && !is_sorted(stack))
 	{
 		if (stack->sizeb > 0 && ((stack->b[0] >> j) & 1) == 0)
@@ -87,11 +84,9 @@ void	radix_sort(t_stack *stack)
 	int		j;
 	int		bit_size;
 	int		size;
-	char	*last_move;
 
 	bit_size = 0;
 	size = stack->sizea;
-	last_move = NULL;
 	while (size > 1 && ++bit_size)
 		size /= 2;
 	j = -1;

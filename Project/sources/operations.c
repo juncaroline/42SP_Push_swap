@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:40:02 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/22 11:36:40 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2024/12/24 10:59:46 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	rotate(char *type, t_stack *stack)
 {
 	int	temp;
 
-	if (!stack)
+	if (!type || !stack)
 		return ;
 	if (ft_strncmp(type, "ra", 2) == 0 && stack->sizea > 1)
 	{
@@ -87,6 +87,8 @@ void	reverse_rotate(char *type, t_stack *stack)
 {
 	int	temp;
 
+	if (!type || !stack)
+		return ;
 	if (ft_strncmp(type, "rra", 3) == 0 && stack->sizea > 1)
 	{
 		temp = stack->a[stack->sizea - 1];
