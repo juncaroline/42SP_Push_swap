@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cabo-ram <cabo-ram@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 11:06:34 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/10/09 11:35:30 by cabo-ram         ###   ########.fr       */
+/*   Created: 2024/10/14 09:55:26 by cabo-ram          #+#    #+#             */
+/*   Updated: 2025/01/06 10:35:53 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+char	*ft_strdup(const char *s)
 {
-	size_t	i;
-	size_t	length;
+	int		l;
+	int		i;
+	char	*s2;
 
+	l = 0;
+	while (s[l] != '\0')
+		l++;
+	s2 = (char *)malloc(sizeof(char) * (l + 1));
+	if (s2 == NULL)
+		return (NULL);
 	i = 0;
-	length = 0;
-	while (src[length] != '\0')
-		length++;
-	if (size > 0)
+	while (s[i] != '\0')
 	{
-		while (src[i] != '\0' && i < (size - 1))
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = '\0';
+		s2[i] = s[i];
+		i++;
 	}
-	return (length);
+	s2[i] = '\0';
+	return (s2);
 }

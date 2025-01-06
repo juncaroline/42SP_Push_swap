@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:57:13 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/22 10:35:16 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2025/01/06 12:21:35 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,19 @@ int	ft_atol(const char *str, t_stack *stack)
 	res = 0;
 	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
 		i++;
-	if (str[i] == '-')
+	if (str[i] == '+' || str[i] == '-')
 	{
-		neg = -1;
+		if (str[i] == '-')
+			neg = -1;
 		i++;
 	}
-	if (ft_strlen(str) > 11)
-		free_exit_msg(stack, "Error\n");
 	while (str[i])
 	{
 		if (!(str[i] >= '0' && str[i] <= '9'))
 			free_exit_msg(stack, "Error\n");
 		res = res * 10 + (str[i++] - '0');
-		if ((neg == 1 && res > INT_MAX) || (neg == -1 && (res * neg) < INT_MIN))
+		if (res > INT_MAX || (res * neg) < INT_MIN
+			|| ft_strlen(str + i) > 10)
 			free_exit_msg(stack, "Error\n");
 	}
 	return ((int)(res * neg));
@@ -77,7 +77,8 @@ void	parse(t_stack *stack)
 	i = 0;
 	while (temp[i] != NULL && temp[i][0] != '\0')
 	{
-		stack->a[j++] = ft_atol(temp[i], stack);
+		if (stack->a != NULL)
+			stack->a[j++] = ft_atol(temp[i], stack);
 		free(temp[i]);
 		i++;
 	}
