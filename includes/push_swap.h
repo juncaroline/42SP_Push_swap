@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:20:22 by cabo-ram          #+#    #+#             */
-/*   Updated: 2024/12/22 10:34:29 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:47:12 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 typedef struct s_stack
 {
-	int		*a;
-	int		*b;
+	long	*a;
+	long	*b;
 	int		sizea;
 	int		sizeb;
 	char	*receive_args;
@@ -43,7 +43,7 @@ int		is_sorted(t_stack *stack);
 void	radix_sort(t_stack *stack);
 void	free_exit_msg(t_stack *stack, char *msg);
 void	parse(t_stack *stack);
-int		ft_atol(const char *str, t_stack *stack);
+long	ft_atol(const char *str);
 int		main(int ac, char **av);
 
 #endif

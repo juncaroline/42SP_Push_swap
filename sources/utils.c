@@ -6,7 +6,7 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:57:13 by cabo-ram          #+#    #+#             */
-/*   Updated: 2025/01/06 12:21:35 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:24:00 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	exit_sorted_duplicate(t_stack *stack, int i)
 					free_exit_msg(stack, "Error\n");
 				j++;
 			}
+			if (stack->a[i] > INT_MAX || stack->a[i] < INT_MIN)
+				free_exit_msg(stack, "Error\n");
 			i++;
 		}
 	}
@@ -35,11 +37,11 @@ void	exit_sorted_duplicate(t_stack *stack, int i)
 		free_exit_msg(stack, NULL);
 }
 
-int	ft_atol(const char *str, t_stack *stack)
+long	ft_atol(const char *str)
 {
-	int			i;
-	long		neg;
-	long long	res;
+	int		i;
+	int		neg;
+	long	res;
 
 	i = 0;
 	neg = 1;
@@ -52,16 +54,12 @@ int	ft_atol(const char *str, t_stack *stack)
 			neg = -1;
 		i++;
 	}
-	while (str[i])
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (!(str[i] >= '0' && str[i] <= '9'))
-			free_exit_msg(stack, "Error\n");
-		res = res * 10 + (str[i++] - '0');
-		if (res > INT_MAX || (res * neg) < INT_MIN
-			|| ft_strlen(str + i) > 10)
-			free_exit_msg(stack, "Error\n");
+		res = res * 10 + (str[i] - '0');
+		i++;
 	}
-	return ((int)(res * neg));
+	return (res * neg);
 }
 
 void	parse(t_stack *stack)
@@ -78,7 +76,10 @@ void	parse(t_stack *stack)
 	while (temp[i] != NULL && temp[i][0] != '\0')
 	{
 		if (stack->a != NULL)
-			stack->a[j++] = ft_atol(temp[i], stack);
+		{
+			stack->a[j] = ft_atol(temp[i]);
+			j++;
+		}
 		free(temp[i]);
 		i++;
 	}
@@ -121,8 +122,8 @@ void	initialize(int ac, char **av, t_stack *stack)
 	}
 	stack->a = malloc(stack->sizea * sizeof(*stack->a));
 	if (stack->a == NULL)
-		free_exit_msg(stack, "Error\n");
+		return ;
 	stack->b = malloc(stack->sizea * sizeof(*stack->b));
 	if (stack->b == NULL)
-		free_exit_msg(stack, "Error\n");
+		return ;
 }

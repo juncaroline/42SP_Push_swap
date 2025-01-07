@@ -6,98 +6,102 @@
 /*   By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:16:27 by cabo-ram          #+#    #+#             */
-/*   Updated: 2025/01/06 12:32:24 by cabo-ram         ###   ########.fr       */
+/*   Updated: 2025/01/07 09:18:03 by cabo-ram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_wcount(char const *s, char c)
+static size_t	ft_scount(char const *s, char c)
 {
-	int	i;
-	int	count;
+	size_t	i;
+	size_t	count;
 
 	i = 0;
 	count = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] != c)
-		{
+		while (s[i] == c)
+			i++;
+		if (s[i] != c && s[i] != '\0')
 			count++;
-			while (s[i] != c && s[i] != '\0')
-				i++;
-		}
-		else
+		while (s[i] != c && s[i] != '\0')
 			i++;
 	}
 	return (count);
 }
 
-static int	ft_word_l(char const *s, char c, int i)
+static char	*ft_memsst(char const *s, size_t i, size_t j)
 {
-	int		word_len;
+	char	*sst;
+	size_t	n;
 
-	word_len = 0;
-	while (s[i] != c && s[i] != '\0')
+	sst = (char *)malloc(sizeof(char) * (i - j + 1));
+	if (sst == NULL)
+		return (NULL);
+	n = 0;
+	while (j < i)
 	{
-		word_len++;
-		i++;
+		sst[n] = s[j];
+		n++;
+		j++;
 	}
-	return (word_len);
+	sst[n] = '\0';
+	return (sst);
 }
 
-static void	ft_free(char **array, int count)
+static void	ft_free_all(char **memalloc, size_t k)
 {
-	int	i;
-
-	i = 0;
-	while (i < count)
+	if (memalloc == NULL)
+		return ;
+	while (k > 0)
 	{
-		if (array[i])
-			free(array[i]);
-		i++;
+		k--;
+		free(memalloc[k]);
 	}
-	free(array);
+	free(memalloc);
 }
 
-static int	fill_words(char **parse_words, char const *s, char c, int count)
+static int	ft_fill_words(char **memalloc, char const *s, char c)
 {
-	int	i;
-	int	j;
-	int	word_len;
+	size_t	i;
+	size_t	j;
+	size_t	k;
 
 	i = 0;
-	j = 0;
-	while (j < count)
+	k = 0;
+	while (s[i] != '\0')
 	{
 		while (s[i] == c)
 			i++;
-		word_len = ft_word_l(s, c, i);
-		parse_words[j] = ft_substr(s, i, word_len);
-		if (parse_words[j] == NULL)
+		j = i;
+		while (s[i] != c && s[i] != '\0')
+			i++;
+		if (i > j)
 		{
-			ft_free(parse_words, j);
-			return (0);
+			memalloc[k] = ft_memsst(s, i, j);
+			if (memalloc[k] == NULL)
+				return (ft_free_all(memalloc, k), 0);
+			k++;
 		}
-		i = i + word_len;
-		j++;
 	}
-	parse_words[j] = NULL;
+	memalloc[k] = NULL;
 	return (1);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**parse_words;
-	int		count;
+	char	**memalloc;
 
-	if (s == NULL)
+	if (!s)
 		return (NULL);
-	count = ft_wcount(s, c);
-	parse_words = (char **)malloc((count + 1) * sizeof(char *));
-	if (parse_words == NULL)
+	memalloc = (char **)malloc(sizeof(char *) * (ft_scount(s, c) + 1));
+	if (memalloc == NULL)
 		return (NULL);
-	if (!fill_words(parse_words, s, c, count))
+	if (!ft_fill_words(memalloc, s, c))
+	{
+		ft_free_all(memalloc, ft_scount(s, c));
 		return (NULL);
-	return (parse_words);
+	}
+	return (memalloc);
 }

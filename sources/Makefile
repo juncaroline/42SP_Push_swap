@@ -6,7 +6,7 @@
 #    By: cabo-ram <cabo-ram@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 09:23:15 by cabo-ram          #+#    #+#              #
-#    Updated: 2024/12/22 10:37:22 by cabo-ram         ###   ########.fr        #
+#    Updated: 2025/01/07 16:03:45 by cabo-ram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT = ../libraries/libft
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER)/includes -g
+CFLAGS = -Wall -Wextra -Werror -I$(HEADER)/includes -g3
 
 RM = rm -rf
 
@@ -31,14 +31,14 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFT) -lft
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFT) -lft
 
 clean:
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
 	@make -C $(LIBFT) clean
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 	@make -C $(LIBFT) fclean
 
 re: fclean all
